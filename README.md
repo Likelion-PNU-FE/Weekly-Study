@@ -25,7 +25,7 @@
 각자의 브랜치에서 다음과 같은 구조로 관리해주세요 !
 
 ```
-- KimJinwoo
+- [아기사자님 이름]
   ├─ Weekly_1
   │   ├─ Source
   │   └─ Study.md
