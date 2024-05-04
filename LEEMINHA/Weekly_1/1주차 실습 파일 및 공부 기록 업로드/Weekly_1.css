@@ -1,0 +1,86 @@
+.Weekly_1head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: orange;
+}
+
+.Weekly_1body {
+    background-color: orange;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    overflow: auto; /*스크롤이 생김*/
+}
+
+
+
+/* .델라고 {
+    
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 20px 50px 30px 50px;
+    overflow : scroll
+}
+
+
+
+.bon {
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 100px 100px 100px 100px;
+    overflow : visible scroll
+    
+}
+
+.bluegrotto {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100px;
+    width: 100px;
+} 
+
+.Weekly_1body > .li {
+    display: flex;
+  align-items: center;
+  justify-content: space-around;
+}*/
+
+
+
+.button {
+    display: block;
+    text-align: center;
+    /*css는 이거 써야 초록으로 만들 수 있나봄*/
+    /*padding이랑 margin 차이는 있는 것 같은데 정확히 뭐가 다른 건지 모르겠음*/
+    padding: 10px 1px; 
+    margin: 2px 1px;
+    text-decoration: none; /*이거 쓰면 하이퍼링크 밑줄 사라짐*/
+    background: #ffd228;
+}
+
+img { /*아 드디어 됨 ㅋㅋ 내가 사진도 해보고 .Weekly_1body > .li > 도 써봤는데 그냥 img 치면 됨. 근데 내가 다른 데 소속된 사진을 다른 크기로 바꾸고 싶으면 얘한테 따로 붙인 이름에다 해줘야하는 거 아닌가*/
+    height: 100px;
+    width: 100px;
+}
+
+.li {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position : static;
+    /*가로로 정렬하고 싶은데 어떻게 하는지 모르겠음*/
+}
+
+.Weekly_1body > .li > .heart { /*이건 왜 안 되는 거임? div로 바꾸니까 됨*/
+    color: red;
+}
+
+.Weekly_1footer {
+    background-color: orange;
+}
+
