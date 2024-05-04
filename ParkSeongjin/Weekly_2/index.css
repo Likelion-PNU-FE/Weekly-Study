@@ -1,0 +1,275 @@
+:root {
+  /* color */
+  --color-bg: #9cafaa;
+  --color-bg-light: #d6dac8;
+  --color-accent: #efbc9b;
+  --color-white: #fbf3d5;
+  --color-black: #000000;
+
+  /* Font size */
+  --font-large: 48px;
+  --font-medium: 28px;
+  --font-regular: 18px;
+  --font-small: 16px;
+  --font-micro: 14px;
+  /* Font weight */
+  --weight-bold: 700;
+  --weight-semi-bold: 600;
+  --weight-regular: 400;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Typography */
+h1 {
+  font-size: var(--font-large);
+  font-weight: var(--weight-bold);
+  color: var(--color-black);
+  margin: 16px 0px;
+}
+
+h2 {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-semi-bold);
+  color: var(--color-black);
+  margin: 8px 0;
+}
+
+h3 {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  margin: 8px 0;
+}
+
+p {
+  font-size: var(--font-regular);
+  font-weight: var(--weight-regular);
+  color: var(--color-black);
+  margin: 4px 0;
+}
+
+body {
+  background: var(--color-white);
+  margin: 0;
+  min-width: 530px;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+img {
+  height: 100px;
+  width: 100px;
+}
+
+#navbar {
+  position: fixed;
+  width: 100%;
+  height: 70px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  align-items: center;
+  background: var(--color-bg);
+  min-width: 530px;
+}
+
+.navbar__button {
+  display: flex;
+  width: 80px;
+  height: 30px;
+  background: var(--color-accent);
+  align-items: center;
+  justify-content: center;
+  box-shadow: 5px 5px 5px gray;
+  font-size: 12px;
+  color: var(--color-title);
+}
+
+.navbar__button:hover {
+  filter: brightness(110%);
+}
+
+.navbar__title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--color-white);
+}
+
+#main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  background: var(--color-bg);
+}
+
+.main__divider {
+  width: 100%;
+  background: var(--color-white);
+  height: 20px;
+}
+
+.main__introduction {
+  margin: 10px 0;
+}
+
+.main__time {
+  margin: 10px 0;
+}
+
+.main__img {
+  width: 400px;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.main__questions {
+  display: flex;
+  flex-direction: column;
+  width: 350px;
+  height: auto;
+  margin: 20px 0px;
+  background: var(--color-white);
+  padding: 10px;
+  outline: 2px solid var(--color-black);
+}
+
+.main__questions__question {
+  margin-bottom: 5px;
+  font-weight: var(--weight-bold);
+}
+
+.main__questions__answer {
+  margin-bottom: 5px;
+}
+
+#footer {
+  display: flex;
+  width: 100%;
+  background: var(--color-bg);
+  margin: 20px 0;
+  padding: 10px 0px;
+}
+
+.footer__contact {
+  flex: 1 0 auto;
+  padding: 10px 0 0 10px;
+}
+
+.footer__contact__detail {
+  color: var(--color-white);
+  font-size: var(--font-micro);
+}
+
+.main__title {
+  color: var(--color-white);
+  font-size: var(--font-regular);
+  margin: 20px 0;
+}
+
+.matzip__add {
+  width: 50%;
+  background: var(--color-white);
+  margin-bottom: 2em;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5vh;
+  border: 1px solid var(--color-black);
+}
+
+.matzip__add input[type="text"] {
+  width: 100%;
+  margin-bottom: 2em;
+  padding: 1vh;
+}
+
+.matzip__add input[type="file"] {
+  opacity: 0;
+}
+
+.image__uploads {
+  width: 100%;
+  border: 1px solid var(--color-black);
+  padding: 1vh;
+  background: var(--color-accent);
+  font-size: 14px;
+}
+
+.image__uploads:hover {
+  opacity: 0.8;
+}
+
+.preview {
+  margin: 0em 0 1em 0;
+  font-size: 12px;
+  width: 100%;
+  border: 1px solid var(--color-black);
+  background: #ffffff;
+  padding: 1vh;
+}
+
+.matzip__add button {
+  display: inline-block;
+  background: var(--color-accent);
+  padding: 0.5em 2em;
+  width: 100%;
+}
+
+.matzip__add button:hover {
+  opacity: 0.8;
+}
+
+#matzips {
+  width: 80%;
+  height: 500px;
+  padding: 10px;
+  background: var(--color-white);
+  border: 1px solid var(--color-black);
+  overflow: scroll;
+  margin-bottom: 30px;
+}
+
+.matzips__matzip {
+  align-items: center;
+  min-width: 370px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr 0.4fr 0.4fr;
+}
+
+.matzips__matzip__title {
+  margin-bottom: 15px;
+  white-space: nowrap;
+  text-align: center;
+  margin: auto;
+  width: 70px;
+  align-items: center;
+}
+
+.matzips__matzip img {
+  margin: auto;
+}
+
+.matzips__matzip__contents {
+  margin: 15px 0px;
+  padding: 0 10px;
+}
+
+.matzips__matzip button {
+  margin: auto;
+}
+
+.matzips__divider {
+  width: 100%;
+}
