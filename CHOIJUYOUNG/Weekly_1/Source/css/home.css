@@ -10,6 +10,7 @@ body {
 
 h2 {
   padding: 15px;
+  margin: 0;
 }
 
 nav > div {
@@ -18,6 +19,7 @@ nav > div {
 
 header {
   padding: 8px 10px;
+  margin-bottom: 20px;
 }
 
 nav {
@@ -42,22 +44,28 @@ button {
 
 img {
   width: 37%;
-  margin: 20px;
+  margin: 10px;
 }
 
-.introduction {
+.introduction,
+.hotplace {
   display: flex;
   justify-content: center;
 }
 
+.hotplace {
+  height: 600px;
+  padding: 20px;
+}
+
+.hotplaceList,
 .QnA {
-  width: 30%;
-  height: auto;
   margin: 10px;
   padding: 5px 20px;
   border: solid rgb(102, 102, 102);
   background-color: rgb(244, 244, 244);
   text-align: left;
+  overflow: scroll;
 }
 
 .question {
@@ -75,4 +83,12 @@ footer {
   margin-top: 20px;
   text-align: left;
   color: gray;
+}
+
+.listLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr 3fr 1fr;
+  align-items: center;
+  justify-items: center;
+  border-bottom: solid 1px gray;
 }
