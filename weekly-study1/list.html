@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<body>
+    <header>
+        <nav>
+            <a href="jinju.html">home</a>
+            <h1>웹프론트엔드 개발자 금진주</h1>
+            <a href="list.html">맛집리스트</a>
+    
+        </nav>
+       </header>
+       <main>
+        <div class="main-content">
+            <h1 class="ml">맛집 리스트</h1>
+            <h2>1.호우오우 샤브</h2>
+            <img src="./1.jpg"alt="샤브샤브" height="300">
+            <p>김해 봉황동 봉리단길<br></p>
+            <p>후식으로 주는 녹차 아이스크림이 맛있음</p>
+            <input type="button" value="♥">
+            <h2>2.연지공원</h2>
+            <img src="./2.jpg"alt="연지공원"height="300">
+            <p>예쁘다</p>
+            <input type="button" value="♥">
+            <h2>3.나오리쇼쿠</h2>
+            <img src="./3.jpg"alt="나오리쇼쿠"height="300">
+            <p>대게내장덮밥<br>
+            <input type="button" value="♥">
+            <h2>4.블루그로토</h2>
+            <img src="./4.jpg"alt="블루그로토"height="300">
+            <p>부산대 주변 어딘가<br></p>
+            <input type="button" value="♥">
+            <h2>5.경성대 학식</h2>
+            <img src="./5.jpg"alt="경성대"height="300">
+            <p>우리학교보다 맛있음</p>
+            <input type="button" value="♥">
+            <h2>6.긴자료코</h2>
+            <img src="./6.jpg"alt="긴자"height="300">
+            <p>크림우동</p>
+            <input type="button" value="♥">
+            <h2>7.르미</h2>
+            <img src="./7.jpg"alt="르미"height="300">
+            <p>우리집 고양이</p>
+            <input type="button" value="♥">
+            <link rel="stylesheet" href="list.css">
+
+            
+         </div>
+         <ul id="list"></ul>
+        
+            <footer>
+                <p>소속 : 부산대학교 멋쟁이사자처럼<br></p>
+                <p>주소 : 부산광역시 금정구 부산대학로63번길 2<br></p>
+                <p> 연락처 : 010-9384-8454<br></p>
+
+                <link rel="stylesheet" href="list.css">
+               
+
+                
+            </footer>
+        
+           
+            
+            <section class="mainSection" id="hpSection">
+            <h1 class="mainText">♥{맛집 리스트}♥</h1>
+            <div class="hpList">
+                <div class="addSection">
+                    <input type="text" id="newPlaceName" placeholder="맛집 이름" /><br> 
+                    <input type="text" id="newPlaceDesc" placeholder="맛집 소개" /><br>
+                    <input type="text" id="newPlaceImg" placeholder="이미지 URL" /><br>
+                    <button onclick="addPlace()">맛집 추가</button><br>
+                </div>
+            </div>
+        </section>
+       </main>
+ 
+       <script> 
+        localStorage.setItem("a","나는 인간이다.")
+        console.log(localStorage.getItem("a"));
+                
+            
+        function addPlace() {
+        let placeName = document.getElementById('newPlaceName').value;
+        let placeDesc = document.getElementById('newPlaceDesc').value;
+        let placeImgUrl = document.getElementById('newPlaceImg').value;
+    
+    
+    
+        if (placeName.trim() === '' || placeDesc.trim() === '' || placeImgUrl.trim() === '') {
+            alert('맛집 이름, 소개, 이미지 URL을 모두 입력해주세요.');
+            return; // 하나라도 비어있다면 리턴
+        }
+    
+        var hpList = document.querySelector('.hpList'); // 맛집 리스트를 담고 있는 컨테이너 선택
+        var newPlace = document.createElement('div');
+        newPlace.classList.add('li');
+    
+    // 입력받은 정보를 포함하는 HTML 생성
+        newPlace.innerHTML = `<h2>${placeName}</h2>
+            <img src="${placeImgUrl}" alt="사진" />
+            <p>${placeDesc}</p>
+            <button class="like">♥</button>
+            <button onclick="removePlace(this)">맛집 삭제</button>`
+        
+    
+    
+        hpList.appendChild(newPlace); // 새 맛집 목록 항목을 리스트에 추가
+        document.getElementById('newPlaceName').value = '';
+        document.getElementById('newPlaceDesc').value = '';
+        document.getElementById('newPlaceImg').value = '';
+        alert(placeName + ' 맛집 등록 완료!');
+    }
+    
+    // 맛집 삭제 함수
+    function removePlace(button) {
+        // 삭제 버튼의 부모 요소('li' 클래스를 가진 div)를 찾아서 제거
+        var place = button.parentNode;
+        place.remove();
+        alert('삭제 완료 !');
+    }
+    </script>
+      
+</body>
+
+</html>
