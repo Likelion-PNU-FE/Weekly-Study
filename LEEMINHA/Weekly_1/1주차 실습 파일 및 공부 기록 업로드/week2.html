@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>이벤트 리스너 예시</title>
+    <style>
+        #infoList li {
+            background-color: #f2f2f2; 
+            margin: 5px;
+            padding: 10px;
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+    <label for="name">이름</label>
+    <input type="text" id="name">
+    <label for="phone">전화번호</label>
+    <input type="tel" id="phone">
+    <label for="greetings">방명록</label>
+    <input type="text" id="greetings">
+    <button id="addButton">추가</button>
+
+    <ul id = "list">
+        
+    </ul>
+
+    <script>
+        document.getElementById("addButton").addEventListener("click",
+            function() {
+               let a = document.getElementById("name").value
+               let b = document.getElementById("phone").value
+               let c = document.getElementById("greetings").value
+
+               let newE = document.createElement('li');
+               newE.textContent = `이름: ${a}, 전화번호: ${b}, 방명록: ${c}`
+
+               let ulEle = document.getElementById('list')
+               ulEle.appendChild(newE);
+               document.getElementById("greetings").value = ''
+               document.getElementById("phone").value = ''
+               document.getElementById("name").value = ''
+               alert(a + "님, 방가");
+            }
+        );
+    </script>
+
+</body>
+</html>
