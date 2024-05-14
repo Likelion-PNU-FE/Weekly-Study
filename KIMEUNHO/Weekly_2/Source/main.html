@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="./reset.css">
+        <link rel="stylesheet" type="text/css" href="./style.css">
+        <title>웹프론트 개발자 KIM EUN HO</title>
+    </head>
+    <body>
+        <!--버튼--> 
+        <nav class="header">
+            <div class="header__inner">
+                <button><a href="main.html">HOME</a></button>
+                <h1 class="title">웹프론트엔드 개발자 KIM EUN HO</h1>
+                <button><a href="test.html">맛집 리스트</a></button>
+            </div>
+        </nav>
+        <!--제목-->
+        <div class="introduction">
+            <h1 class="main_introduction">배움을 즐기는 개발자 김은호입니다!</h1>
+            <h1 id="clock">clock</h1>
+            <div class="image_border">
+                <img class="main_image" src=".\likelion.png" alt="로고">
+            </div>
+        </div>
+        <!--내용시작-->
+        <section id="main">
+            <h2 class="main_question">Q1. 자기소개 부탁드립니다.</h2>
+            <p class="answer">안녕하십니까! 초보 프론트 개발자 김은호입니다. 프론트엔드 개발 처음인만큼 부족한 점이 많지만 열심히 배우겠습니다!</p>
+            
+            <h2 class="main_question">Q2. 자신의 장점은 무엇인가요?</h2>
+            <p class="answer">저는 맡은바를 열심히 하고 성실한점이 장점입니다.</p>
+        
+            <h2 class="main_question">Q3. 자신의 단점이 무엇인가요?</h2>
+            <p class="answer">내향적이고 항상 걱정이 많은 것이 단점입니다.</p>
+        
+            <h2 class="main_question">Q4. 자신의 기술 스텍을 적어주세요</h2>
+            <p class="answer">python, c++, java를 조금 다룰줄 압니다. 아직 초보 개발자이고 프론트엔드는 처음이라 많이 배우겠습니다!</p>
+        </section>
+        <!--푸터-->
+        <footer id="footer">
+            <p class="footer_content">이메일: keho1123@gmail.com</p>
+            <p class="footer_content">소속: 부산대학교 멋쟁이사자처럼</p>
+            <p class="footer_content">주소: 부산광역시 금정구 부산대학로63번길 2</p>
+            <p class="footer_content">연락처: 051-512-0311
+        </footer>
+
+        <script>
+            let target = document.getElementById("clock");
+            function addZero(number){
+                return number<10?'0${number}':number;
+            }
+            function clock(){
+            let time = new Date();
+            let hours = addZero(time.getHours());
+            let minutes = addZero(time.getMinutes());
+            let seconds = addZero(time.getSeconds());
+            target.innerText=`${hours}:${minutes}:${seconds}`;
+            }
+            clock();
+            setInterval(clock, 1000);
+        </script>
+    </body>
+
+</html>
