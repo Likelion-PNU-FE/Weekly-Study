@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/index.css" />
+    <link rel="stylesheet" type="text/css" href="/reset.css" />
+    <script src="/main.js" defer></script>
+    <title>웹프론트엔드 개발자 PARK SEONGJIN</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav id="navbar">
+      <div class="navbar__button">
+        <a href="/index.html">Home</a>
+      </div>
+      <h1 class="navbar__title">웹프론트엔드 개발자 PARK SEONGJIN</h1>
+      <div class="navbar__button">
+        <a href="/matzip.html">맛집 리스트</a>
+      </div>
+    </nav>
+    <!-- matzips-->
+    <section id="main">
+      <hr class="main__divider" />
+      <h1 class="main__title">맛집리스트</h1>
+      <form class="matzip__add" method="post" enctype="multipart/form-data">
+        <label for="name"></label>
+        <input
+          type="text"
+          id="name"
+          placeholder="맛집 이름을 입력하세요"
+          required
+        />
+        <label for="description"></label>
+        <input
+          type="text"
+          id="description"
+          placeholder="맛집 정보를 입력하세요"
+          required
+        />
+        <label for="image_uploads" class="image__uploads"
+          >업로드할 이미지를 고르세요.(PNG, JPG)</label
+        >
+        <input
+          type="file"
+          id="image_uploads"
+          name="image_uploads"
+          accept="image/*"
+          required
+        />
+        <p class="preview">업로드할 이미지가 선택되지 않았습니다.</p>
+        <button>맛집 추가</button>
+      </form>
+      <div id="matzips">
+        <div class="matzips__matzip">
+          <h3 class="matzips__matzip__title">월남면반</h3>
+          <img src="imgs/wnmb.png" alt="월남면반" />
+          <p class="matzips__matzip__contents">
+            심하게 맛있는 집. 베트남음식 처음 먹어봤는데 부담없고 오히려
+            다이어트식이고 맛있어요.
+          </p>
+          <button>♥</button>
+          <button class="delete__btn">🗑️</button>
+        </div>
+        <hr class="matzips__divider" />
+        <div class="matzips__matzip">
+          <h3 class="matzips__matzip__title">구워삶기</h3>
+          <img src="imgs/grill.png" alt="구워삶기" />
+          <p class="matzips__matzip__contents">
+            물만두(양많은 걸로) 추천/ 꼭꼭 쿨피스 슬러쉬 시키기/양 엄청 혜자/
+            고기 제육볶음맛인데 새로운 맛조합!!! ​
+          </p>
+          <button>♥</button>
+          <button class="delete__btn">🗑️</button>
+        </div>
+        <hr class="matzips__divider" />
+        <div class="matzips__matzip">
+          <h3 class="matzips__matzip__title">도야지면옥</h3>
+          <img src="imgs/doyaji.png" />
+          <p class="matzips__matzip__contents">
+            얼큰한 국물 국수 추천 / 둘이간다면 꼭 커플세트 시켜서 순대랑 수육
+            맛보기 추천
+          </p>
+          <button>♥</button>
+          <button class="delete__btn">🗑️</button>
+        </div>
+        <hr class="matzips__divider" />
+        <div class="matzips__matzip">
+          <h3 class="matzips__matzip__title">신육간</h3>
+          <img src="imgs/meat.png" alt="맛집 3" />
+          <p class="matzips__matzip__contents">
+            어마무시한 고기 맛집/ 스테이크 세트 (with 떡볶이) 추천/
+            순두부+육회세트 추천/ 고기집인데 분위기 조음
+          </p>
+          <button>♥</button>
+          <button class="delete__btn">🗑️</button>
+        </div>
+      </div>
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+      <div class="footer__contact">
+        <p class="footer__contact__detail">Email: seongjin8247@gmail.com</p>
+        <p class="footer__contact__detail">소속: 부산대학교 멋쟁이사자처럼</p>
+        <p class="footer__contact__detail">주소 : 부산광역시 남구 분포로 111</p>
+        <p class="footer__contact__detail">연락처 : 010-6334-8247</p>
+      </div>
+    </footer>
+  </body>
+</html>
