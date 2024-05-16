@@ -38,18 +38,15 @@
           placeholder="맛집 정보를 입력하세요"
           required
         />
-        <label for="image_uploads" class="image__uploads"
-          >업로드할 이미지를 고르세요.(PNG, JPG)</label
-        >
+        <label for="image_uploads"></label>
         <input
-          type="file"
+          type="text"
           id="image_uploads"
           name="image_uploads"
-          accept="image/*"
+          placeholder="IMG URL을 입력하세요."
           required
         />
-        <p class="preview">업로드할 이미지가 선택되지 않았습니다.</p>
-        <button>맛집 추가</button>
+        <button type="submit">맛집 추가</button>
       </form>
       <div id="matzips">
         <div class="matzips__matzip">
