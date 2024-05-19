@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hotplace</title>
+    <link rel="stylesheet" type="text/css" href="hotplace.css">
+    
+</head>
+<body> 
+    <nav class="Weekly_1head">
+        <div><a class="button" href="minha.html">Home</a></div>
+        <h1>웹프론트엔드 개발자 LEE</h1>
+        <div><a class="button" href="Weekly_1.html">맛집 리스트</a></div>
+    </nav>
+
+    <div class="blank">
+        <br />
+    </div>
+
+    <div class="Weekly_1body">
+        <h2>맛집 리스트</h2>
+        <div class="addHotplace">
+            <label for="name"></label>
+            <input type="text" id="name" placeholder="맛집 이름">
+            <div class="blank">
+                <br />
+            </div>
+            <label for="content"></label>
+            <input type="text" id="content" placeholder="맛집 소개">
+            <div class="blank">
+                <br />
+            </div>
+            <label for="picture"></label>
+            <input type="text" id="picture" placeholder="이미지 URL"> 
+            <div class="blank">
+                <br />
+            </div>
+            <button id="addBtn">추가</button>
+        </div>
+        
+        <div class="blank">
+            <br />
+        </div>
+
+        <div id="">
+        <div class="li">
+            <h4 class="dellago_title">델라고</h4>
+            <img src="./dellago.jpg" alt="사진" />
+            <p class="dellago_content">맛있는 양식 집. 근데 비싸다. 치즈가 맛있음</p>
+            <button class="heart">♥</button>
+            <button class="hotplaceDelete">삭제</button>
+        </div>
+        <br />
+        <div class="li">
+            <h4 class="mamadoma_title">마마도마</h4>
+            <img src="./mamadoma.jpg" alt="사진" />
+            <p class="mamadoma_content">연어가 엄청 두꺼움</p>
+            <button class="heart">♥</button>
+            <button class="hotplaceDelete">삭제</button>
+        </div>
+        <br />
+        <div class="li">
+            <h4 class="bluegrotto_title">블루그로토</h4>
+            <img src="./bluegrotto.jpg" alt="사진" />
+            <p class="bluegrotto_content">팬케이크 맛있음</p>
+            <button class="heart">♥</button>
+            <button class="hotplaceDelete">삭제</button>
+        </div>
+        <br />
+        <div class="li">
+            <h4 class="bon_title">본죽</h4>
+            <img src="./bon.jpg" alt="사진" />
+            <p class="bon_content">죽은 맛있다</p>
+            <button class="heart">♥</button>
+            <button class="hotplaceDelete">삭제</button>
+        </div>
+        <ul id = "list">
+        </ul>
+        </div>
+
+        <br />
+        </div>
+
+    <div class="blank">
+        <br />
+    </div>
+
+    <div class="Weekly_1footer">
+        <p>이메일: alsgk9988@gmail.com</p>
+        <p>소속: 부산대학교 멋쟁이사자처럼</p>
+        <p>주소: 부산광역시 금정구 부산대학로63번길 2</p>
+        <p>연락처: 051-512-0311</p>        
+    </div>
+
+    <script>
+        
+        // 로컬 스토리지에서 맛집 정보 가져오기
+        function getHotplacesFromLocalStorage() {
+            let hotplaces = localStorage.getItem('hotplaces');
+            if (hotplaces) {
+                return JSON.parse(hotplaces);  //JSON에서 JS로 들고온다?
+            } else {
+                return [];
+            }
+        }
+
+        // 로컬 스토리지에 맛집 정보 저장하기
+        function saveHotplaceToLocalStorage(name, content, picture) {
+            let hotplaces = getHotplacesFromLocalStorage();
+            hotplaces.push({ name, content, picture }); //배열 이름.배열 맨 뒤에 새로 추가하는 함수(새로 넣는 거);
+            localStorage.setItem('hotplaces', JSON.stringify(hotplaces));  //JS에서 받은 정보?를 JSON에 저장한다
+        }
+
+        // 로컬 스토리지에서 맛집 정보 삭제하기
+        function deleteHotplaceFromLocalStorage(name) {
+            let hotplaces = getHotplacesFromLocalStorage();
+            hotplaces = hotplaces.filter(hotplace => hotplace.name !== name); 
+            //hotplace.name !== name 이건 내가 준 맛집 이름과 다른 name만 true 나옴. 결국은 내가 누른 거 뺀 나머지 맛집들로만 새로운 배열이 만들어짐
+            localStorage.setItem('hotplaces', JSON.stringify(hotplaces));
+        }
+
+         // 화면에 맛집 추가
+         function addHotplaceToUI(name, content, picture) {
+            let newE = document.createElement('div');
+            let newName = document.createElement('h4');
+            newName.textContent = name;
+            let newContent = document.createElement('p');
+            newContent.textContent = content;
+            let newPicture = document.createElement('img');
+            newPicture.src = picture;
+            newPicture.width = 100;
+            newPicture.height = 100;
+
+            newE.appendChild(newName);
+            newE.appendChild(newPicture);
+            newE.appendChild(newContent);
+            let button1 = document.createElement('button');
+            button1.classList.add('heart');
+            button1.textContent = '♥'
+            
+            let button2 = document.createElement('button');
+            button2.classList.add('hotplaceDelete');
+            button2.textContent = '삭제'
+            
+            button2.addEventListener("click", function(e) {
+                let liElement = e.target.closest('.li');
+                liElement.remove();
+                alert('삭제 완료!');
+                // 로컬 스토리지에서 해당 맛집 정보 삭제
+                deleteHotplaceFromLocalStorage(name);
+            });
+
+            newE.classList.add('li');
+            newE.appendChild(button1);
+            newE.appendChild(button2);
+            let ulEle = document.getElementById('list')
+            ulEle.appendChild(newE);
+        }
+
+        // 맛집 등록 버튼 클릭 이벤트
+        document.getElementById("addBtn").addEventListener("click", function() { 
+            let name = document.getElementById("name").value;
+            let content = document.getElementById("content").value;
+            let picture = document.getElementById("picture").value;
+
+            // 화면에 추가
+            addHotplaceToUI(name, content, picture);
+
+            // 로컬 스토리지에 저장
+            saveHotplaceToLocalStorage(name, content, picture);
+
+            // 입력 필드 초기화
+            document.getElementById("name").value = '';
+            document.getElementById("content").value = '';
+            document.getElementById("picture").value = '';
+            alert(name + " 맛집 등록 완료!");
+        });
+
+        // 페이지 로드 시, 저장된 맛집 정보를 화면에 표시
+        window.onload = function() {
+            let hotplaces = getHotplacesFromLocalStorage();
+            hotplaces.forEach(hotplace => {
+                addHotplaceToUI(hotplace.name, hotplace.content, hotplace.picture);
+            });
+        };
+    </script>
+</body>
+</html>
