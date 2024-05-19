@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>맛집 리스트</title>
+</head>
+<body>
+    <!-- 버튼 -->
+    <nav class="header">
+        <div class="header__inner">
+            <button><a href="main.html">HOME</a></button>
+            <h1 class="title">웹프론트엔드 개발자 KIM EUN HO</h1>
+            <button><a href="test.html">맛집 리스트</a></button>
+        </div>
+    </nav>
+    <!-- 본문 -->
+    <section id="res_main">
+        <h1 class="title">맛집 리스트</h1>
+        <!-- 맛집 추가 -->
+        <form id="res_add">
+            <h2>맛집추가</h2><br>
+            <label for="name">맛집이름</label>
+            <input type="text" id="name" placeholder="맛집이름" required>
+
+            <label for="content">맛집소개</label>
+            <input type="text" id="content" placeholder="맛집소개" required>
+
+            <label for="image_url">맛집사진URL</label>
+            <input type="url" id="image_url" placeholder="맛집사진URL">
+
+            <button id="addbtn">맛집추가</button>
+        </form>
+        <div class="filter">
+            <button id="all">전체</button>
+            <button id="like">최애 맛집</button>
+        </div>
+        <div id="restaurant_list"></div>
+    </section>
+    <footer class="footer">
+        <p class="footer_content">이메일: keho1123@gmail.com</p>
+        <p class="footer_content">소속: 부산대학교 멋쟁이사자처럼</p>
+        <p class="footer_content">주소: 부산광역시 금정구 부산대학로63번길 2</p>
+        <p class="footer_content">연락처: 051-512-0311</p>
+    </footer>
+    <script>
+        /*더미 데이터*/
+       const dummyData = [
+    {
+        name: '메이리',
+        img: 'https://picsum.photos/100/100',
+        review: '사람들이 항상 붐비는 중화요리를 아주 맛있게 하는 집. 모든 메뉴가 맛있어서 취향에 맞게 시키면 됩니다!',
+        like: false,
+        menu: [
+            { name: '꿔바로우', price: '27000' },
+            { name: '칠리새우', price: '33000' },
+            { name: '탄탄면', price: '10000' },
+            { name: '레몬크림새우', price: '33000' },
+            { name: '유산슬', price: '38000' },
+        ],
+    },
+    {
+        name: '동래정 소고기해장국',
+        img: 'https://picsum.photos/100/100',
+        review: '깔끔한 해장국이 일품인 집. 미리 선지를 빼달라고 하면 빼주시지만 먹어보실 것을 추천!',
+        like: false,
+        menu: [
+            { name: '소고기해장국', price: '10000' },
+            { name: '곰탕', price: '12000' },
+            { name: '어복쟁반', price: '68000' },
+            { name: '소고기수육', price: '32000' },
+            { name: '수육무침', price: '15000' },
+        ],
+    },
+    {
+        name: '촌국수',
+        img: 'https://picsum.photos/100/100',
+        review: '가게이름은 촌국수지만, 콩나물 비빔밥이 맛있는 집. 가격도 착하고 비빔당면도 추천!',
+        like: false,
+        menu: [
+            { name: '콩나물비빔밥', price: '5000' },
+            { name: '비빔당면', price: '4500' },
+            { name: '촌국수', price: '3500' },
+            { name: '비빔국수', price: '4000' },
+            { name: '바다국수', price: '3500' },
+        ],
+    },
+    {
+        name: '다온 브레드',
+        img: 'https://picsum.photos/100/100',
+        review: '모든 빵을 수제로 만드시는 빵집. 모든 빵이 맛있어서 못고르겠습니다!',
+        like: true,
+        menu: [
+            { name: '소금빵', price: '2400' },
+            { name: '소세지 페스츄리', price: '4000' },
+            { name: '우유 모닝', price: '3900' },
+            { name: '블루베리빵', price: '4300' },
+            { name: '흑미닭가슴살 샌드위치', price: '6000' },
+        ],
+    },
+    {
+        name: '초록섬미역',
+        img: 'https://picsum.photos/100/100',
+        review: '먹어본 미역국 중에 가장 맛있게 하는 집. 취향에 맞게 여러 종류의 미역국이 있습니다!',
+        like: true,
+        menu: [
+            { name: '조개미역국', price: '14000' },
+            { name: '소고기미역국', price: '14000' },
+            { name: '가자미미역국', price: '13000' },
+            { name: '전복소고기미역국', price: '19000' },
+            { name: '전복조개미역국', price: '19000' },
+        ],
+    },
+];
+
+document.addEventListener('DOMContentLoaded', () => {
+    const restaurantList = document.getElementById('restaurant_list');
+    const allBtn = document.getElementById('all');
+    const likeBtn = document.getElementById('like');
+    const addForm = document.getElementById('res_add');
+
+    // 맛집을 화면에 출력
+    function displayRestaurants(restaurants) {
+        restaurantList.innerHTML = '';
+        restaurants.forEach((restaurant) => {
+            const resSection = createRestaurantSection(restaurant);
+            restaurantList.appendChild(resSection);
+        });
+    }
+
+    // 맛집 추가 형식
+    function createRestaurantSection(restaurant) {
+        const resSection = document.createElement('div');
+        resSection.classList.add('res_section');
+
+        const resImage = document.createElement('div');
+        resImage.classList.add('res_image');
+        const img = document.createElement('img');
+        img.classList.add('restaurant_image');
+        img.src = restaurant.img;
+        img.alt = restaurant.name;
+        resImage.appendChild(img);
+
+        const resName = document.createElement('h2');
+        resName.classList.add('restaurant');
+        resName.textContent = restaurant.name;
+
+        const resContent = document.createElement('p');
+        resContent.classList.add('restaurant_content');
+        resContent.textContent = restaurant.review;
+
+        const likeBtn = document.createElement('button');
+        likeBtn.classList.add('like_btn');
+        likeBtn.textContent = restaurant.like ? '❤️' : '🩶';
+        likeBtn.addEventListener('click', (event) => {
+            event.preventDefault(); 
+            restaurant.like = !restaurant.like;
+            likeBtn.textContent = restaurant.like ? '❤️' : '🩶';
+           
+        });
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.classList.add('delete_btn');
+        deleteBtn.textContent = '맛집 삭제';
+        deleteBtn.addEventListener('click', (event) => {
+            event.preventDefault();
+            const index = dummyData.indexOf(restaurant);
+            dummyData.splice(index, 1);
+            displayRestaurants(dummyData);
+            alert(`'${restaurant.name}' 맛집을 삭제완료!.`);
+        });
+
+        resSection.appendChild(resImage);
+        resSection.appendChild(resName);
+        resSection.appendChild(resContent);
+        resSection.appendChild(likeBtn);
+        resSection.appendChild(deleteBtn);
+
+        resSection.addEventListener('click', () => {
+        if (event.target.classList.contains('like_btn') || event.target.classList.contains('delete_btn')) {
+            event.stopPropagation();
+            return;
+        }
+            localStorage.setItem('selectedRestaurant', JSON.stringify(restaurant));
+            window.location.href = 'menu.html';
+        });
+
+        return resSection;
+    }
+
+    // 맛집 추가
+    addForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const name = document.getElementById('name').value;
+        const review = document.getElementById('content').value;
+        const imgUrl = document.getElementById('image_url').value || 'https://picsum.photos/100/100';
+
+        if (name && review) {
+            const newRestaurant = {
+                name: name,
+                img: imgUrl,
+                review: review,
+                like: false,
+                menu: []
+            };
+            dummyData.push(newRestaurant);
+            displayRestaurants(dummyData);
+            addForm.reset();
+            alert(`'${name}' 맛집을 추가했습니다.`);
+        } else {
+            alert('맛집 이름과 소개를 입력하세요.');
+        }
+    });
+
+    // 필터링 버튼
+    allBtn.addEventListener('click', () => {
+        displayRestaurants(dummyData);
+    });
+    
+    likeBtn.addEventListener('click', () => {
+        const likedRestaurants = dummyData.filter(restaurant => restaurant.like);
+        displayRestaurants(likedRestaurants);
+    });
+
+    // 초기 맛집 목록 표시
+    displayRestaurants(dummyData);
+});
+
+    </script>   
+    </body>
+</html>
+    
