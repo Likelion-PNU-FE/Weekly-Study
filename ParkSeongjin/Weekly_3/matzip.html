@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="text/css" href="/index.css" />
+    <link rel="stylesheet" type="text/css" href="/reset.css" />
+    <script type="module" src="/main.js" defer></script>
+    <title>웹프론트엔드 개발자 PARK SEONGJIN</title>
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav id="navbar">
+      <div class="navbar__button">
+        <a href="/index.html">Home</a>
+      </div>
+      <h1 class="navbar__title">웹프론트엔드 개발자 PARK SEONGJIN</h1>
+      <div class="navbar__button">
+        <a href="/matzip.html">맛집 리스트</a>
+      </div>
+    </nav>
+    <!-- matzips-->
+    <section id="main">
+      <h1 class="main__title">맛집리스트</h1>
+      <form class="matzip__add" method="post">
+        <label for="name"></label>
+        <input
+          type="text"
+          id="name"
+          placeholder="맛집 이름을 입력하세요"
+          required
+        />
+        <label for="description"></label>
+        <input
+          type="text"
+          id="description"
+          placeholder="맛집 정보를 입력하세요"
+          required
+        />
+        <label for="image_uploads"></label>
+        <input
+          type="text"
+          id="image_uploads"
+          placeholder="IMG URL을 입력하세요."
+          required
+        />
+        <button type="submit">맛집 추가</button>
+      </form>
+      <div class="matzip__filter">
+        <button class="category__btn selected" data-filter="*">전체</button>
+        <button class="category__btn" data-filter="like">최애맛집</button>
+      </div>
+      <div id="matzips"></div>
+    </section>
+    <!-- footer -->
+    <footer id="footer">
+      <div class="footer__contact">
+        <p class="footer__contact__detail">Email: seongjin8247@gmail.com</p>
+        <p class="footer__contact__detail">소속: 부산대학교 멋쟁이사자처럼</p>
+        <p class="footer__contact__detail">주소 : 부산광역시 남구 분포로 111</p>
+        <p class="footer__contact__detail">연락처 : 010-6334-8247</p>
+      </div>
+    </footer>
+  </body>
+</html>
