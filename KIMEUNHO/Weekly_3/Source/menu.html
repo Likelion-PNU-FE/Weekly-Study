@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="./reset.css">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <title>메뉴 리스트</title>
+</head>
+<body>
+    <!-- 버튼 -->
+    <nav class="header">
+        <div class="header__inner">
+            <button><a href="main.html">HOME</a></button>
+            <h1 class="title">웹프론트엔드 개발자 KIM EUN HO</h1>
+            <button><a href="test.html">맛집 리스트</a></button>
+        </div>
+    </nav>
+    <!-- 본문 -->
+    <section id="menu_main">
+        <h1 class="title">메뉴 리스트</h1>
+        <div id="menu_list">
+            <!--메뉴 리스트 추가-->
+        </div>
+        <form id="menu_add_form">
+            <h2>메뉴 추가</h2>
+            <label for="menu_name">메뉴 이름:</label>
+            <input type="text" id="menu_name" placeholder="메뉴 이름" required>
+            <label for="menu_price">메뉴 가격:</label>
+            <input type="text" id="menu_price" placeholder="메뉴 가격" required>
+            <button type="submit">메뉴 추가</button>
+        </form>
+    </section>
+    <footer class="footer">
+        <p class="footer_content">이메일: keho1123@gmail.com</p>
+        <p class="footer_content">소속: 부산대학교 멋쟁이사자처럼</p>
+        <p class="footer_content">주소: 부산광역시 금정구 부산대학로63번길 2</p>
+        <p class="footer_content">연락처: 051-512-0311</p>
+    </footer>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const selectedRestaurant = JSON.parse(localStorage.getItem('selectedRestaurant'));
+            const menuList = document.getElementById('menu_list');
+            const menuAddForm = document.getElementById('menu_add_form');
+            const menuNameInput = document.getElementById('menu_name');
+            const menuPriceInput = document.getElementById('menu_price');
+
+            /*가격을 10,000원 형태로*/
+            function formatPrice(price) {
+                return new Intl.NumberFormat('ko-KR', { style: 'currency', currency: 'KRW' }).format(price).replace('₩', '') + '원';
+            }
+
+            /*메뉴를 출력*/
+            function displayMenu(menuItems) {
+                menuList.innerHTML = '';
+                menuItems.forEach(menuItem => {
+                    const menuDiv = document.createElement('div');
+                    menuDiv.classList.add('menu_item');
+
+                    const menuName = document.createElement('p');
+                    menuName.classList.add('menu_name');
+                    menuName.textContent = menuItem.name;
+
+                    const menuPrice = document.createElement('p');
+                    menuPrice.classList.add('menu_price');
+                    menuPrice.textContent = formatPrice(menuItem.price);
+
+                    menuDiv.appendChild(menuName);
+                    menuDiv.appendChild(menuPrice);
+
+                    menuList.appendChild(menuDiv);
+                });
+            }
+
+            if (selectedRestaurant && selectedRestaurant.menu) {
+                displayMenu(selectedRestaurant.menu);
+            } else {
+                menuList.innerHTML = '<p>선택된 맛집이 없습니다.</p>';
+            }
+
+            menuAddForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const menuName = menuNameInput.value;
+                const menuPrice = parseInt(menuPriceInput.value.replace(/,/g, ''), 10);
+
+                if (menuName && !isNaN(menuPrice)) {
+                    const newMenuItem = { name: menuName, price: menuPrice };
+                    selectedRestaurant.menu.push(newMenuItem);
+                    localStorage.setItem('selectedRestaurant', JSON.stringify(selectedRestaurant));
+                    displayMenu(selectedRestaurant.menu);
+                    menuNameInput.value = '';
+                    menuPriceInput.value = '';
+                    alert(`${menuName} 등록 완료!`);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

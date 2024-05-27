@@ -1,0 +1,210 @@
+#h1 {
+    font-size: xx-large;
+    color: black;
+    margin: 20px;
+}
+
+h2 {
+    font-size: x-large;
+    color: black;
+    margin: 10px;
+}
+
+p {
+    font-size: large;
+    color: black;
+    margin: 10px;
+}
+
+body {
+    background: rgb(117, 168, 201);
+    width: auto;
+    height: auto;
+    margin: auto;
+}
+
+.header {
+    position: fixed;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    background: rgb(122, 148, 204);
+    font-weight: bolder;
+}
+
+.introduction {
+    padding-top: 100px;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.header__inner {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.title {
+    font-weight: bolder;
+    text-align: center;
+    font-size: x-large;
+    color: black;
+    margin-bottom: 10px;
+}
+
+.main__introduction {
+    font-size: large;
+    align-items: center;
+}
+
+#clock {
+    color: black;
+}
+
+.image_border {
+    text-align: center;
+}
+
+.main_image {
+    height: 500px;
+    width: 500px;
+    margin: 0 auto;
+}
+
+#main {
+    text-align: center;
+    border: 1px solid black;
+    padding: 10px 50px 10px 50px;
+    margin: 50px;
+    background: rgb(148, 176, 195);
+}
+
+.main_question {
+    color: black;
+    font-size: large;
+    font-weight: bolder;
+}
+
+.answer {
+    color: black;
+    font-size: medium;
+}
+
+#res_main {
+    border: 1px solid black;
+    padding: 60px 50px 60px 50px;
+    margin: 50px;
+    background: rgb(148, 176, 195);
+    overflow: scroll;
+
+}
+
+#res_add{
+    display: flex;
+    flex-direction: column;
+    background: rgb(198, 204, 220);
+    margin-bottom: 10px;
+    align-items: center;
+    padding: 1px;
+    border: 3px solid black;
+}
+
+#res_add input{
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.filter{
+    display:flex;
+    align-items:center;
+    background-color: rgb(148, 176, 195);
+    border:1px solid black;
+    margin:5px;
+}
+
+.res_section {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid black;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #dbdaec;
+    align-items: center;
+}
+
+.restaurant {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 30px;
+    width: 200px;
+    font-size: large;
+    font-weight: bolder;
+
+}
+
+.restaurant_image {
+    height: 100px;
+    width: 100px;
+    margin-bottom: 10px;
+}
+
+.res_image {
+    text-align: center;
+}
+
+.restaurant_content {
+    flex-grow: 1;
+    margin-left: 20px;
+
+}
+
+#footer {
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    width: 100%;
+    background: rgb(148, 176, 195);
+    margin: 5px 0;
+    padding: 10x 0px;
+}
+
+.footer_content {
+    color: black;
+}
+
+
+
+#menu_list {
+    width: 100%;
+}
+
+.menu_item {
+    border: 1px black;
+    padding: 10px;
+    background-color: #e9ebeb;
+    margin-bottom: 10px;
+}
+
+.menu_name {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.menu_price {
+    color: #666;
+    font-size: 16px;
+}
+
+/* 메뉴 추가 폼 스타일링 */
+#menu_add_form {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f9f9f9;
+    max-width: 800px; /* 최대 너비 지정 */
+    width: 100%;
+    margin: 0 auto; /* 가운데 정렬 */
+}
+
