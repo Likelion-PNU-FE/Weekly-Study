@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>맛집 리스트</title>
+    <link rel="stylesheet" href="list.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="jinju.html">home</a>
+            <h1>웹프론트엔드 개발자 금진주</h1>
+            <a href="list.html">맛집리스트</a>
+        </nav>
+    </header>
+    <main>
+        <div class="main-content">
+            <h1 class="ml">맛집 리스트</h1>
+            <h2>1.호우오우 샤브</h2>
+            <img src="./1.jpg" alt="샤브샤브" height="300">
+            <p>김해 봉황동 봉리단길</p>
+            <p>후식으로 주는 녹차 아이스크림이 맛있음</p>
+            <input type="button" value="♥">
+            <h2>2.연지공원</h2>
+            <img src="./2.jpg" alt="연지공원" height="300">
+            <p>예쁘다</p>
+            <input type="button" value="♥">
+            <!-- 나머지 맛집 정보들도 유사하게 작성 -->
+        </div>
+        <ul id="restaurantList"></ul>
+    </main>
+    <footer>
+        <p>소속 : 부산대학교 멋쟁이사자처럼</p>
+        <p>주소 : 부산광역시 금정구 부산대학로63번길 2</p>
+        <p>연락처 : 010-9384-8454</p>
+    </footer>
+
+    <section class="mainSection" id="hpSection">
+        <h1 class="mainText">♥{맛집 리스트}♥</h1>
+        <div class="hpList">
+            <div class="addSection">
+                <input type="text" id="newPlaceName" placeholder="맛집 이름" /><br> 
+                <input type="text" id="newPlaceDesc" placeholder="맛집 소개" /><br>
+                <input type="text" id="newPlaceImg" placeholder="이미지 URL" /><br>
+                <button onclick="addPlace()">맛집 추가</button><br>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        let restaurantList = [];
+
+        function loadRestaurantList() {
+            const storedList = localStorage.getItem('restaurantList');
+            if (storedList) {
+                restaurantList = JSON.parse(storedList);
+            }
+        }
+
+        function saveRestaurantList() {
+            localStorage.setItem('restaurantList', JSON.stringify(restaurantList));
+        }
+
+        function addPlace() {
+            let placeName = document.getElementById('newPlaceName').value;
+            let placeDesc = document.getElementById('newPlaceDesc').value;
+            let placeImgUrl = document.getElementById('newPlaceImg').value;
+
+            if (placeName.trim() === '' || placeDesc.trim() === '' || placeImgUrl.trim() === '') {
+                alert('맛집 이름, 소개, 이미지 URL을 모두 입력해주세요.');
+                return;
+            }
+
+            restaurantList.push({
+                name: placeName,
+                desc: placeDesc,
+                imgUrl: placeImgUrl,
+                liked: false
+            });
+
+            saveRestaurantList();
+
+            // 추가된 맛집을 화면에 표시
+            renderRestaurant(restaurantList.length - 1);
+
+            // 입력 필드 초기화
+            document.getElementById('newPlaceName').value = '';
+            document.getElementById('newPlaceDesc').value = '';
+            document.getElementById('newPlaceImg').value = '';
+
+            alert(placeName + ' 맛집 등록 완료!');
+        }
+
+        function renderRestaurant(index) {
+            const newPlace = restaurantList[index];
+            const hpList = document.getElementById('restaurantList');
+            const li = document.createElement('li');
+
+            li.innerHTML = `
+                <h2>${newPlace.name}</h2>
+                <img src="${newPlace.imgUrl}" alt="${newPlace.name}" height="300">
+                <p>${newPlace.desc}</p>
+                <button class="like" onclick="toggleLike(${index})">${newPlace.liked ? '❤️' : '🤍'}</button>
+                <button onclick="deleteRestaurant(${index})">맛집 삭제</button>
+            `;
+
+            hpList.appendChild(li);
+        }
+
+        function deleteRestaurant(index) {
+            restaurantList.splice(index, 1);
+            saveRestaurantList();
+            loadRestaurantList();
+            renderAllRestaurants();
+        }
+
+        function toggleLike(index) {
+            restaurantList[index].liked = !restaurantList[index].liked;
+            saveRestaurantList();
+            loadRestaurantList();
+            renderAllRestaurants();
+        }
+
+        function renderAllRestaurants() {
+            const hpList = document.getElementById('restaurantList');
+            hpList.innerHTML = ''; // Clear existing list
+            restaurantList.forEach((place, index) => {
+                renderRestaurant(index);
+            });
+        }
+
+        // 페이지 로드 시 맛집 리스트 불러오기
+        loadRestaurantList();
+        renderAllRestaurants();
+    </script>
+</body>
+</html>

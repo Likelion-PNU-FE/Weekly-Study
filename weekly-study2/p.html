@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <label for="name">맛집 이름 : </label>
+        <input type="text" id="name">
+        <label for="discription">맛집 소개 : </label>
+        <input type="text" id="discription">
+        <label for="image">이미지 URL</label>
+        <input type="ment" id="image">
+        <button id="add">추가</button>
+    </div>
+    <ul id="list"></ul>
+</body>
+<script>
+    document.getElementById("add").addEventListener("click",function(){
+    var list = document.getElementById("list");
+    var name = document.getElementById("name").value;
+    var number = document.getElementById("number").value;
+    var ment = document.getElementById("ment").value;
+
+    var item = document.createElement("li");
+    item.textContent=""+name +", 전화번호 : "+number + ", 인사말 : " +ment;
+    list.appendChild(item);
+
+    alert('안녕하세요'+name+'님');
+
+    });
+
+</script>
+</html>
