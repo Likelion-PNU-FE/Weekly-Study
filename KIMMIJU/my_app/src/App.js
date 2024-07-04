@@ -17,10 +17,11 @@ const App = () => {
     };
 
     const toggleTodo = (index) => {
-        setTodos(todos.map((todo, i) => (i === index ? { ...todo, completed: !todo.completed } : todo)));
+        const newTodos = todos.map((todo, i) => (i === index ? { ...todo, completed: !todo.completed } : todo));
+        setTodos(newTodos);
     };
 
-    const completedCount = todos.filter((todo) => todo.completed).length;
+    const completedTodosCount = todos.filter((todo) => todo.completed).length;
 
     return (
         <div className='app'>
@@ -30,23 +31,20 @@ const App = () => {
                     type='text'
                     value={todoText}
                     onChange={(e) => setTodoText(e.target.value)}
-                    placeholder='할 일을 입력해주세요'
+                    placeholder='Enter a todo'
                 />
-                <button onClick={addTodo}>작성하기</button>
+                <button onClick={addTodo}>Add Todo</button>
             </div>
             <ul className='todo-list'>
                 {todos.map((todo, index) => (
                     <li key={index} className={todo.completed ? 'completed' : ''}>
                         <span onClick={() => toggleTodo(index)}>{todo.text}</span>
-                        <div className='buttons'>
-                            <button onClick={() => toggleTodo(index)}>{todo.completed ? '완료' : '취소'}</button>
-                            <button onClick={() => deleteTodo(index)}>삭제</button>
-                        </div>
+                        <button onClick={() => deleteTodo(index)}>Delete</button>
                     </li>
                 ))}
             </ul>
             <div className='todo-stats'>
-                {completedCount} / {todos.length}
+                Completed Todos: {completedTodosCount} / Total Todos: {todos.length}
             </div>
         </div>
     );
