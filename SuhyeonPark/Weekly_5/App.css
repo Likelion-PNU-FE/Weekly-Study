@@ -1,0 +1,63 @@
+#infoList {
+  margin: 0;
+  padding-left: 0px;
+}
+
+#infoList li {
+  margin: 5px;
+  padding: 10px 10px 10px 15px;
+  list-style-type: none;
+}
+
+#status {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  margin: 5px;
+  padding-left: 15px;
+}
+
+.input-field {
+  padding: 10px;
+  border: 2px solid gray;
+  border-radius: 5px;
+  flex: 1;
+  margin-right: 10px;
+}
+
+.submit-button {
+  background-color: orange;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.button {
+  padding: 10px 30px;
+  margin: 5px 2px;
+  border-radius: 5px;
+  border: 2px solid orange;
+  cursor: pointer;
+  background-color: #FFFFFF;
+  color: #000000;
+  font-weight: bold;
+  text-align: center;
+  font-family: sans-serif;
+}
+
+.custom_text {
+  font-size: 20px;
+  font-weight: bold;
+}
