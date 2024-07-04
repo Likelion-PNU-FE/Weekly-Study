@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+ 
+  <head>
+    <meta charset = "UTF-8">
+    <style>
+
+      #infoList{
+         margin : 0;
+         padding-left : 0px;
+       }
+      
+      #infoList li {
+          margin: 5px;
+          padding: 10px 10px 10px 15px;
+          list-style-type: none;
+      }
+
+      #status {
+        position : fixed;
+        bottom : 0;
+        left : 0;
+        width : 100%;
+        text-align : center;
+        padding : 10px;
+        font-weight : bold;
+        font-size : 20px;
+      }
+
+      .container{
+        display : flex;
+        align-items : center;
+        margin : 5px; 
+        padding-left: 15px;
+      }
+
+      .input-field {
+            padding: 10px;
+            border: 2px gray;
+            border-radius: 5px;
+            flex: 1;
+            margin-right: 10px;
+        }
+
+       .submit-button {
+           background-color: orange;
+           color: white;
+           padding: 10px 20px;
+           border: none;
+           border-radius: 5px;
+           cursor: pointer;
+       }  
+
+      .button{
+        padding : 10px 30px;
+        margin : 5px 2px;
+        border-radius : 5px;
+        border-color : orange;
+        cursor : pointer;
+        background-color : #FFFFFF;
+        color : #000000;
+        
+      }
+
+      .custom_text{
+        font-size : 20px;
+        font-weight : bold;
+      }
+
+    </style>
+  </head>
+
+  <body>
+    <h1>
+      <b>TodoList</b>
+    </h1>
+
+    <!-- 할 일 받아오기 위한 인풋 -->
+    <div class="container">
+      <input type="text" id="topic" class="input-field" placeholder="할 일을 입력해주세요" />
+      <button id = "submit-button" class="submit-button">작성하기</button>
+    </div>
+
+    <!-- 상태 - 할 일들 갯수 세기 위한 숫자 -->
+    <div id = "status">0/0</div>
+
+
+    <!-- 받아온 할 일 들 형성해주는 list -->
+    <ul id ="infoList"></ul>
+    <script>  //작성하기 버튼의 JS 시작
+      document.getElementById("submit-button").addEventListener("click", function(){
+        
+        // topic 값 받아오기
+        let topic = document.getElementById("topic").value;
+        // topic 입력 검증        
+        if(topic == ""){
+          alert("값을 입력해주세요!");
+          return;
+        }
+
+        // list는 전체 Todolist item들을 받는 list
+        // newItem은 todolist의 이름 , 버튼을 갖는 list
+        var list = document.getElementById("infoList");
+        var newItem = document.createElement("li");
+
+
+        // TodoList 입력값을 가지는 bold체 20px "text"
+        // <span>으로 감싸주기 위해서 createElemnt 사용
+        // <span> : 해당 내부에서 class 적용가능
+        // classList.add 로 class 여러 개 적용 가능
+        var textNode = document.createElement("span");
+        textNode.textContent = topic;
+        textNode.classList.add("custom_text");
+
+        // (취소/완료)버튼 생성
+        // 취소버튼은 내부 값이 완료이면 취소선 긋고 취소로 바꿈
+        // 내부 값이 취소이면 취소선 없애고 완료로 바꿈
+        var completeButton = document.createElement("button");
+        completeButton.textContent = "완료";
+        completeButton.className = "button";
+        completeButton.addEventListener("click",function(){
+          var topicText = newItem.querySelector(".custom_text")
+          if(completeButton.textContent === "완료"){
+            topicText.style.textDecoration = "line-through";
+            completeButton.textContent = "취소";
+          }
+          else{
+            topicText.style.textDecoration = "none";
+            completeButton.textContent = "완료";
+          }
+
+          //완료 후 상태 업데이트
+          updateStatus();
+        });
+
+
+        // 삭제 버튼 생성
+        // 삭제버튼은 누르면 해당 Child newItem 값을 삭제함
+        var deleteButton = document.createElement("button");
+        deleteButton.textContent = "삭제";
+        deleteButton.className = "button";
+        deleteButton.addEventListener("click",function(){
+          list.removeChild(newItem);
+
+          // 삭제 후 상태 업데이트
+          updateStatus();
+        });
+
+
+        // newItem ( todoList 새 노드 )에 값들 추가 ( 제목 / 버튼 버튼)
+        newItem.appendChild(textNode);
+        // 줄바꿈을 위해서 br을 추가해줬음
+        newItem.appendChild(document.createElement("br"));
+        newItem.appendChild(completeButton);
+        newItem.appendChild(deleteButton);
+
+        // list에 새 노드 추가
+        list.appendChild(newItem);
+
+        // 이후 topic을 ""로 만들어서 초기화
+        document.getElementById("topic").value = "";
+
+        updateStatus();        
+      });
+      //작성하기 버튼의 JS 끝
+
+
+      //updateStatus() 정의
+      // infoList li의 갯수를 셀 것임. ( document의 li요소를 querySelectorAll을 통해 length 받으면 될 듯)
+      // completed count = 위의 li요소에서 for문을 돌려서 완료버튼의 글자 === 취소 ( 완료인 경우 취소글자를 띄워서 취소할 수 있게 하기 때문)을 확인
+      // 이후 status의 Text를 바꿈
+      function updateStatus(){
+        var listItem = document.querySelectorAll("#infoList li");
+        var totalCount = listItem.length;
+        var completedCount = 0;
+
+        listItem.forEach(function(item){
+          var completedButton = item.querySelector(".button"); // button class 가지는 가장 첫 요소 (완료/취소 버튼)을 completedButton에 넣음
+          if(completedButton.textContent === "취소"){
+            completedCount++;
+          }
+        });
+
+        // back space로(``) 내부 글자를 변수로 사용 가능
+        document.getElementById("status").textContent = `${completedCount}/${totalCount}`;
+      }
+    </script>
+
+
+  </body>
+  
+</html>
